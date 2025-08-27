@@ -9,9 +9,10 @@ require_relative 'person'
 #
 module SchemaDotOrg
   class DiscussionForumPosting < SchemaType
-    # TODO: Allow for type Person or Organization
+    # TODO: Allow for type Person OR Organization
     validated_attr :author,        type: Person, presence: true
-    # TODO: Allow for type Date or DateTime
+    
+    # TODO: Allow for type Date OR DateTime
     validated_attr :datePublished, type: Date,   presence: true
 
     validated_attr :comment,              type: Array,   allow_nil: true
