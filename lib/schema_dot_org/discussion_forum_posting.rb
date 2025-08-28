@@ -10,10 +10,8 @@ require_relative 'organization'
 #
 module SchemaDotOrg
   class DiscussionForumPosting < SchemaType
-    validated_attr :author, type: union(Person, Organization), presence: true
-
-    # TODO: Allow for type Date OR DateTime
-    validated_attr :datePublished, type: Date,   presence: true
+    validated_attr :author,        type: union(Person, Organization), presence: true
+    validated_attr :datePublished, type: union(Date, Time),           presence: true
 
     validated_attr :comment,              type: Array,   allow_nil: true
     validated_attr :commentCount,         type: Integer, allow_nil: true

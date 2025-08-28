@@ -158,13 +158,13 @@ RSpec.describe SchemaDotOrg::DiscussionForumPosting do
       }.not_to raise_error
     end
 
-    it 'accepts a DateTime as the datePublished' do
+    it 'accepts a Time as the datePublished' do
       expect {
         SchemaDotOrg::DiscussionForumPosting.new(
           headline: 'Great Post',
           text: 'This is a great post!',
           author: SchemaDotOrg::Person.new(name: 'Alice'),
-          datePublished: DateTime.new(2020, 1, 1, 12, 0, 0),
+          datePublished: Time.new(2020, 1, 1, 12, 0, 0),
           image: ['https://example.com/image.jpg'],
           url: 'https://example.com/post',
           mainEntityOfPage: 'https://example.com/post',
@@ -189,7 +189,7 @@ RSpec.describe SchemaDotOrg::DiscussionForumPosting do
       }.not_to raise_error
     end
 
-    it 'rejects a type other than Date or DateTime as the datePublished' do
+    it 'rejects a type other than Date or Time as the datePublished' do
       expect {
         SchemaDotOrg::DiscussionForumPosting.new(
           headline: 'Great Post',
