@@ -49,6 +49,7 @@ RSpec.describe SchemaDotOrg::Organization do
 
       expect(public_law.to_json_struct).to eq(
         '@type' => 'Organization',
+        "address" => {"@type" => "PostalAddress", "addressCountry" => "US", "addressLocality" => "Denver"},
         'name' => 'Public.Law',
         'email' => 'say_hi@public.law',
         'telephone' => '+1 234 567 8901',
