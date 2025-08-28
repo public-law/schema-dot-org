@@ -1,6 +1,7 @@
 ## 2.5.1
 
-* Type: PostalAddress
-* Add PostAddress to Organization.address
-* Support for type unions
-* Support for typed arrays
+* New Type: PostalAddress
+* Add PostalAddress to Organization.address
+* Add PostalAddress to Place.address
+* Add support for type unions
+* Add support for typed arrays
