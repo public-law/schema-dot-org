@@ -5,9 +5,9 @@ lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
-  spec.required_ruby_version = '>= 3.0'
+  spec.required_ruby_version = '>= 3.1'
   spec.name          = 'schema_dot_org'
-  spec.version       = '2.5.0'
+  spec.version       = '2.5.1'
   spec.authors       = ['Robert Shecter']
   spec.email         = ['robert@public.law']
 
@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'validated_object', '~> 2.3'
+  spec.add_dependency 'validated_object', '~> 2.3.4'
 
   spec.add_development_dependency "bundler", "~> 2.4"
   spec.add_development_dependency "rake", "~> 13.0"

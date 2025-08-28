@@ -2,6 +2,7 @@
 
 require 'date'
 require_relative 'person'
+require_relative 'organization'
 
 #
 # Model the Schema.org `Thing > CreativeWork > Article > SocialMediaPosting > DiscussionForumPosting`.
@@ -9,11 +10,8 @@ require_relative 'person'
 #
 module SchemaDotOrg
   class DiscussionForumPosting < SchemaType
-    # TODO: Allow for type Person OR Organization
-    validated_attr :author,        type: Person, presence: true
-    
-    # TODO: Allow for type Date OR DateTime
-    validated_attr :datePublished, type: Date,   presence: true
+    validated_attr :author,        type: union(Person, Organization), presence: true
+    validated_attr :datePublished, type: union(Date, Time),           presence: true
 
     validated_attr :comment,              type: Array,   allow_nil: true
     validated_attr :commentCount,         type: Integer, allow_nil: true

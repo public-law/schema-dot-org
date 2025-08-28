@@ -5,7 +5,7 @@
     - [Principle: No silent failures](#principle-no-silent-failures)
     - [You are prevented from creating invalid markup](#you-are-prevented-from-creating-invalid-markup)
   - [Supported Schema.org Types](#supported-schemaorg-types)
-  - [More Examples](#examples)
+  - [Examples](#examples)
     - [BreadcrumbList](#breadcrumblist)
     - [WebSite](#website)
   - [Installation](#installation)
@@ -140,6 +140,7 @@ See each type's RSpec for an example of how to use it.
 | Organization           | [Schema.org](https://schema.org/Organization)           | [RSpec](https://github.com/public-law/schema-dot-org/blob/master/spec/schema_dot_org/organization_spec.rb)             | [Source](https://github.com/public-law/schema-dot-org/blob/master/lib/schema_dot_org/organization.rb)             |
 | Person                 | [Schema.org](https://schema.org/Person)                 | [RSpec](https://github.com/public-law/schema-dot-org/blob/master/spec/schema_dot_org/person_spec.rb)                   | [Source](https://github.com/public-law/schema-dot-org/blob/master/lib/schema_dot_org/person.rb)                   |
 | Place                  | [Schema.org](https://schema.org/Place)                  | [RSpec](https://github.com/public-law/schema-dot-org/blob/master/spec/schema_dot_org/place_spec.rb)                    | [Source](https://github.com/public-law/schema-dot-org/blob/master/lib/schema_dot_org/place.rb)                    |
+| PostalAddress          | [Schema.org](https://schema.org/PostalAddress)          | [RSpec](https://github.com/public-law/schema-dot-org/blob/master/spec/schema_dot_org/postal_address_spec.rb)           | [Source](https://github.com/public-law/schema-dot-org/blob/master/lib/schema_dot_org/postal_address.rb)           |
 | Product                | [Schema.org](https://schema.org/Product)                | [RSpec](https://github.com/public-law/schema-dot-org/blob/master/spec/schema_dot_org/product_spec.rb)                  | [Source](https://github.com/public-law/schema-dot-org/blob/master/lib/schema_dot_org/product.rb)                  |
 | SearchAction           | [Schema.org](https://schema.org/SearchAction)           | [RSpec](https://github.com/public-law/schema-dot-org/blob/master/spec/schema_dot_org/search_action_spec.rb)            | [Source](https://github.com/public-law/schema-dot-org/blob/master/lib/schema_dot_org/search_action.rb)            |
 | WebSite                | [Schema.org](https://schema.org/WebSite)                | [RSpec](https://github.com/public-law/schema-dot-org/blob/master/spec/schema_dot_org/web_site_spec.rb)                 | [Source](https://github.com/public-law/schema-dot-org/blob/master/lib/schema_dot_org/web_site.rb)                 |
