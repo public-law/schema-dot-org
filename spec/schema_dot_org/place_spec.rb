@@ -15,6 +15,11 @@ RSpec.describe SchemaDotOrg::Place do # rubocop:disable Metrics/BlockLength
       expect { SchemaDotOrg::Place.new(address: 'NY, NY') }
     end
 
+    it 'creates a Place when given an Address entity' do
+      address = SchemaDotOrg::PostalAddress.new(streetAddress: '12345 Happy Street')
+      expect { SchemaDotOrg::Place.new(address:) }.not_to raise_error
+    end
+
     it 'will not create a Place with an unknown attribute' do
       expect do
         SchemaDotOrg::Place.new(
