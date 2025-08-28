@@ -11,6 +11,10 @@ module SchemaDotOrg
   ##
   # See https://schema.org/Organization
   #
+  # TODO: Think about the naming of `contact_points`. Would `contact_point` be
+  # better? Organization changed, and now the property is singular, but it can
+  # still accept multiple values.
+  #
   class Organization < SchemaType
     validated_attr :address,           type: PostalAddress,                       allow_nil: true
     validated_attr :contact_points,    type: union(ContactPoint, [ContactPoint]), allow_nil: true
