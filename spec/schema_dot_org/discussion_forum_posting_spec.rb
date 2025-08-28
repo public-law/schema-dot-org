@@ -36,7 +36,32 @@ RSpec.describe SchemaDotOrg::DiscussionForumPosting do
   describe '#new' do
     it 'accepts a Person as the author' do
       expect {
-        SchemaDotOrg::DiscussionForumPosting.new(author: SchemaDotOrg::Person.new(name: 'Alice'))
+        SchemaDotOrg::DiscussionForumPosting.new(
+          headline: 'Great Post',
+          text: 'This is a great post!',
+          author: SchemaDotOrg::Person.new(name: 'Alice'),
+          datePublished: Date.new(2020, 1, 1),
+          image: ['https://example.com/image.jpg'],
+          url: 'https://example.com/post',
+          mainEntityOfPage: 'https://example.com/post',
+          comment: [SchemaDotOrg::Comment.new(
+            text: 'Great comment!',
+            author: SchemaDotOrg::Person.new(name: 'Bob'),
+            datePublished: Date.new(2020, 1, 2),
+            url: 'https://example.com/comment',
+            )
+          ],
+          interactionStatistic: [
+            SchemaDotOrg::InteractionCounter.new(
+              userInteractionCount: 5,
+              interactionType: 'https://schema.org/LikeAction',
+            ),
+            SchemaDotOrg::InteractionCounter.new(
+              userInteractionCount: 200,
+              interactionType: 'https://schema.org/ViewAction',
+            )
+          ]
+        )
       }.not_to raise_error
     end
 
