@@ -27,9 +27,9 @@ module SchemaDotOrg
     validated_attr :slogan,            type: String,                              allow_nil: true
     validated_attr :telephone,         type: String,                              allow_nil: true
 
-    #
+    ########################################
     # Attributes that are required by Google
-    #
+    ########################################
     validated_attr :logo,              type: String
     validated_attr :name,              type: String
     # Google allows `url` to be a string, although schema.org does not:
