@@ -1,3 +1,7 @@
+## 2.5.2
+
+* Improved code comments
+
 ## 2.5.1
 
 * New Type: PostalAddress
