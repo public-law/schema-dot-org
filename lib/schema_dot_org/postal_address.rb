@@ -6,8 +6,12 @@
 #
 module SchemaDotOrg
   class PostalAddress < SchemaType
-    # StreetAddress: The street address. For example, 1600 Amphitheatre Parkway.
-    validated_attr :streetAddress,   type: String, allow_nil: true
+
+    # AddressCountry: The country. Recommended to be in 2-letter ISO 3166-1 alpha-2
+    # format, for example "US". For backward compatibility, a 3-letter ISO 3166-1 alpha-3
+    # country code such as "SGP" or a full country name such as "Singapore" can also be
+    # used.
+    validated_attr :addressCountry,  type: String, allow_nil: true
 
     # AddressLocality: The locality in which the street address is,
     # and which is in the region. For example, Mountain View.
@@ -19,5 +23,8 @@ module SchemaDotOrg
 
     # PostalCode: The postal code. For example, 94043.
     validated_attr :postalCode,      type: String, allow_nil: true
+
+    # StreetAddress: The street address. For example, 1600 Amphitheatre Parkway.
+    validated_attr :streetAddress,   type: String, allow_nil: true
   end
 end
