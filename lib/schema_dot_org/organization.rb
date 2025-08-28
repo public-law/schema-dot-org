@@ -23,7 +23,7 @@ module SchemaDotOrg
     validated_attr :founding_date,     type: Date,                                allow_nil: true
     validated_attr :founding_location, type: Place,                               allow_nil: true
     validated_attr :legal_name,        type: String,                              allow_nil: true
-    validated_attr :same_as,           type: Array,                               allow_nil: true
+    validated_attr :same_as,           type: union(String, [String]),             allow_nil: true
     validated_attr :slogan,            type: String,                              allow_nil: true
     validated_attr :telephone,         type: String,                              allow_nil: true
 
