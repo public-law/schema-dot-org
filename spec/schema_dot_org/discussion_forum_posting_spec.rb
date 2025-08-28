@@ -67,7 +67,32 @@ RSpec.describe SchemaDotOrg::DiscussionForumPosting do
 
     it 'accepts an Organization as the author' do
       expect {
-        SchemaDotOrg::DiscussionForumPosting.new(author: SchemaDotOrg::Organization.new(name: 'Acme Inc.'))
+        SchemaDotOrg::DiscussionForumPosting.new(
+          headline: 'Great Post',
+          text: 'This is a great post!',
+          author: SchemaDotOrg::Organization.new(name: 'Acme Inc.', url: 'https://example.com/acme', logo: 'https://example.com/acme/logo.png'),
+          datePublished: Date.new(2020, 1, 1),
+          image: ['https://example.com/image.jpg'],
+          url: 'https://example.com/post',
+          mainEntityOfPage: 'https://example.com/post',
+          comment: [SchemaDotOrg::Comment.new(
+            text: 'Great comment!',
+            author: SchemaDotOrg::Person.new(name: 'Bob'),
+            datePublished: Date.new(2020, 1, 2),
+            url: 'https://example.com/comment',
+            )
+          ],
+          interactionStatistic: [
+            SchemaDotOrg::InteractionCounter.new(
+              userInteractionCount: 5,
+              interactionType: 'https://schema.org/LikeAction',
+            ),
+            SchemaDotOrg::InteractionCounter.new(
+              userInteractionCount: 200,
+              interactionType: 'https://schema.org/ViewAction',
+            )
+          ]
+        )
       }.not_to raise_error
     end
 
