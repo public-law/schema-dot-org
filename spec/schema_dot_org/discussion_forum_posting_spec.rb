@@ -34,9 +34,46 @@ RSpec.describe SchemaDotOrg::DiscussionForumPosting do
   end
 
   describe '#new' do
+    it 'accepts a Person as the author' do
+      expect {
+        SchemaDotOrg::DiscussionForumPosting.new(author: SchemaDotOrg::Person.new(name: 'Alice'))
+      }.not_to raise_error
+    end
+
+    it 'accepts an Organization as the author' do
+      expect {
+        SchemaDotOrg::DiscussionForumPosting.new(author: SchemaDotOrg::Organization.new(name: 'Acme Inc.'))
+      }.not_to raise_error
+    end
+
     it 'raises an error if the author is not a Person or Organization' do
       expect {
-        SchemaDotOrg::DiscussionForumPosting.new(author: 'not a Person or Organization')
+        SchemaDotOrg::DiscussionForumPosting.new(
+          headline: 'Great Post',
+          text: 'This is a great post!',
+          author: "Somebody",
+          datePublished: Date.new(2020, 1, 1),
+          image: ['https://example.com/image.jpg'],
+          url: 'https://example.com/post',
+          mainEntityOfPage: 'https://example.com/post',
+          comment: [SchemaDotOrg::Comment.new(
+            text: 'Great comment!',
+            author: SchemaDotOrg::Person.new(name: 'Bob'),
+            datePublished: Date.new(2020, 1, 2),
+            url: 'https://example.com/comment',
+            )
+          ],
+          interactionStatistic: [
+            SchemaDotOrg::InteractionCounter.new(
+              userInteractionCount: 5,
+              interactionType: 'https://schema.org/LikeAction',
+            ),
+            SchemaDotOrg::InteractionCounter.new(
+              userInteractionCount: 200,
+              interactionType: 'https://schema.org/ViewAction',
+            )
+          ]
+        )
       }.to raise_error(ArgumentError)
     end
   end
