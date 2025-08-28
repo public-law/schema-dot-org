@@ -31,7 +31,7 @@ RSpec.describe SchemaDotOrg::Organization do
             'https://www.facebook.com/PublicDotLaw'
           ]
         )
-      end.to raise_error(NoMethodError)
+      end.to raise_error
     end
 
 
@@ -50,7 +50,42 @@ RSpec.describe SchemaDotOrg::Organization do
             'https://www.facebook.com/PublicDotLaw'
           ]
         )
-      end.not_to raise_error(NoMethodError)
+      end.not_to raise_error
+    end
+
+
+    it 'is valid with multiple same_as URLS' do
+      expect do
+        SchemaDotOrg::Organization.new(
+          name: 'Public.Law',
+          founder: SchemaDotOrg::Person.new(name: 'Robb Shecter'),
+          founding_date: Date.new(2009, 3, 6),
+          founding_location: SchemaDotOrg::Place.new(address: 'Portland, OR'),
+          email: 'say_hi@public.law',
+          url: 'https://www.public.law',
+          logo: 'https://www.public.law/favicon-196x196.png',
+          same_as: [
+            'https://twitter.com/law_is_code',
+            'https://www.facebook.com/PublicDotLaw'
+          ]
+        )
+      end.not_to raise_error
+    end
+
+
+    it 'is valid with a single same_as URL' do
+      expect do
+        SchemaDotOrg::Organization.new(
+          name: 'Public.Law',
+          founder: SchemaDotOrg::Person.new(name: 'Robb Shecter'),
+          founding_date: Date.new(2009, 3, 6),
+          founding_location: SchemaDotOrg::Place.new(address: 'Portland, OR'),
+          email: 'say_hi@public.law',
+          url: 'https://www.public.law',
+          logo: 'https://www.public.law/favicon-196x196.png',
+          same_as: 'https://twitter.com/law_is_code'
+        )
+      end.not_to raise_error
     end
 
 
