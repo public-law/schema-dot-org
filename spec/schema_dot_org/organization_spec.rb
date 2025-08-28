@@ -31,7 +31,7 @@ RSpec.describe SchemaDotOrg::Organization do
             'https://www.facebook.com/PublicDotLaw'
           ]
         )
-      end.to raise_error
+      end.to raise_error(NoMethodError, /snack_time/)
     end
 
 
