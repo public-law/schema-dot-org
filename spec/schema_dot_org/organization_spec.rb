@@ -5,11 +5,20 @@ require 'schema_dot_org'
 
 
 RSpec.describe SchemaDotOrg::Organization do
+  let(:main_office) do
+    SchemaDotOrg::ContactPoint.new(
+      contact_type: 'customer service',
+      telephone: '+1-800-555-1212',
+      contact_option: 'TollFree',
+      available_language: %w[English Spanish]
+    )
+  end
+
   describe '#new' do
     it 'will not create with an unknown attribute' do
       expect do
         SchemaDotOrg::Organization.new(
-          snack_time: 'today',
+          snack_time: 'today', # !!!
           name: 'Public.Law',
           founder: SchemaDotOrg::Person.new(name: 'Robb Shecter'),
           founding_date: Date.new(2009, 3, 6),
@@ -22,7 +31,61 @@ RSpec.describe SchemaDotOrg::Organization do
             'https://www.facebook.com/PublicDotLaw'
           ]
         )
-      end.to raise_error(NoMethodError)
+      end.to raise_error(NoMethodError, /snack_time/)
+    end
+
+
+    it 'is invalid without a logo' do
+      expect do
+        SchemaDotOrg::Organization.new(
+          name: 'Public.Law',
+          founder: SchemaDotOrg::Person.new(name: 'Robb Shecter'),
+          founding_date: Date.new(2009, 3, 6),
+          founding_location: SchemaDotOrg::Place.new(address: 'Portland, OR'),
+          email: 'say_hi@public.law',
+          url: 'https://www.public.law',
+          same_as: [
+            'https://twitter.com/law_is_code',
+            'https://www.facebook.com/PublicDotLaw'
+          ]
+        )
+      end.to raise_error(ArgumentError, /Logo/)
+    end
+
+
+    it 'is invalid without a URL' do
+      expect do
+        SchemaDotOrg::Organization.new(
+          name: 'Public.Law',
+          founder: SchemaDotOrg::Person.new(name: 'Robb Shecter'),
+          founding_date: Date.new(2009, 3, 6),
+          founding_location: SchemaDotOrg::Place.new(address: 'Portland, OR'),
+          email: 'say_hi@public.law',
+          logo: 'https://www.public.law/favicon-196x196.png',
+          same_as: [
+            'https://twitter.com/law_is_code',
+            'https://www.facebook.com/PublicDotLaw'
+          ]
+        )
+      end.to raise_error(ArgumentError, /Url/)
+    end
+
+
+    it 'is invalid without a name' do
+      expect do
+        SchemaDotOrg::Organization.new(
+          founder: SchemaDotOrg::Person.new(name: 'Robb Shecter'),
+          founding_date: Date.new(2009, 3, 6),
+          founding_location: SchemaDotOrg::Place.new(address: 'Portland, OR'),
+          email: 'say_hi@public.law',
+          url: 'https://www.public.law',
+          logo: 'https://www.public.law/favicon-196x196.png',
+          same_as: [
+            'https://twitter.com/law_is_code',
+            'https://www.facebook.com/PublicDotLaw'
+          ]
+        )
+      end.to raise_error(ArgumentError, /Name/)
     end
 
 
@@ -41,7 +104,89 @@ RSpec.describe SchemaDotOrg::Organization do
             'https://www.facebook.com/PublicDotLaw'
           ]
         )
-      end.not_to raise_error(NoMethodError)
+      end.not_to raise_error
+    end
+
+
+    it 'is valid with multiple same_as URLS' do
+      expect do
+        SchemaDotOrg::Organization.new(
+          name: 'Public.Law',
+          founder: SchemaDotOrg::Person.new(name: 'Robb Shecter'),
+          founding_date: Date.new(2009, 3, 6),
+          founding_location: SchemaDotOrg::Place.new(address: 'Portland, OR'),
+          email: 'say_hi@public.law',
+          url: 'https://www.public.law',
+          logo: 'https://www.public.law/favicon-196x196.png',
+          same_as: [
+            'https://twitter.com/law_is_code',
+            'https://www.facebook.com/PublicDotLaw'
+          ]
+        )
+      end.not_to raise_error
+    end
+
+
+    it 'is valid with a single same_as URL' do
+      expect do
+        SchemaDotOrg::Organization.new(
+          name: 'Public.Law',
+          founder: SchemaDotOrg::Person.new(name: 'Robb Shecter'),
+          founding_date: Date.new(2009, 3, 6),
+          founding_location: SchemaDotOrg::Place.new(address: 'Portland, OR'),
+          email: 'say_hi@public.law',
+          url: 'https://www.public.law',
+          logo: 'https://www.public.law/favicon-196x196.png',
+          same_as: 'https://twitter.com/law_is_code'
+        )
+      end.not_to raise_error
+    end
+
+
+    it 'is valid with a single ContactPoint' do
+      expect do
+        SchemaDotOrg::Organization.new(
+          name: 'Public.Law',
+          contact_points: main_office,
+          founder: SchemaDotOrg::Person.new(name: 'Robb Shecter'),
+          founding_date: Date.new(2009, 3, 6),
+          founding_location: SchemaDotOrg::Place.new(address: 'Portland, OR'),
+          email: 'say_hi@public.law',
+          url: 'https://www.public.law',
+          logo: 'https://www.public.law/favicon-196x196.png',
+          same_as: [
+            'https://twitter.com/law_is_code',
+            'https://www.facebook.com/PublicDotLaw'
+          ]
+        )
+      end.not_to raise_error
+    end
+
+
+    it 'is valid with two ContactPoints' do
+      hr_office = SchemaDotOrg::ContactPoint.new(
+        contact_type: 'human resources',
+        telephone: '+1-800-555-1213',
+        contact_option: 'TollFree',
+        available_language: ['English']
+      )
+
+      expect do
+        SchemaDotOrg::Organization.new(
+          name: 'Public.Law',
+          contact_points: [main_office, hr_office],
+          founder: SchemaDotOrg::Person.new(name: 'Robb Shecter'),
+          founding_date: Date.new(2009, 3, 6),
+          founding_location: SchemaDotOrg::Place.new(address: 'Portland, OR'),
+          email: 'say_hi@public.law',
+          url: 'https://www.public.law',
+          logo: 'https://www.public.law/favicon-196x196.png',
+          same_as: [
+            'https://twitter.com/law_is_code',
+            'https://www.facebook.com/PublicDotLaw'
+          ]
+        )
+      end.not_to raise_error
     end
 
 
