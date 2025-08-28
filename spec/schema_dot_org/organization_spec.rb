@@ -5,6 +5,15 @@ require 'schema_dot_org'
 
 
 RSpec.describe SchemaDotOrg::Organization do
+  let(:main_office) do
+    SchemaDotOrg::ContactPoint.new(
+      contact_type: 'customer service',
+      telephone: '+1-800-555-1212',
+      contact_option: 'TollFree',
+      available_language: %w[English Spanish]
+    )
+  end
+
   describe '#new' do
     it 'will not create with an unknown attribute' do
       expect do
@@ -44,14 +53,8 @@ RSpec.describe SchemaDotOrg::Organization do
       end.not_to raise_error(NoMethodError)
     end
 
-    it 'is valid with a single ContactPoint' do
-      main_office = SchemaDotOrg::ContactPoint.new(
-        contact_type: 'customer service',
-        telephone: '+1-800-555-1212',
-        contact_option: 'TollFree',
-        available_language: %w[English Spanish]
-      )
 
+    it 'is valid with a single ContactPoint' do
       expect do
         SchemaDotOrg::Organization.new(
           name: 'Public.Law',
@@ -72,13 +75,6 @@ RSpec.describe SchemaDotOrg::Organization do
 
 
     it 'is valid with two ContactPoints' do
-      main_office = SchemaDotOrg::ContactPoint.new(
-        contact_type: 'customer service',
-        telephone: '+1-800-555-1212',
-        contact_option: 'TollFree',
-        available_language: %w[English Spanish]
-      )
-
       hr_office = SchemaDotOrg::ContactPoint.new(
         contact_type: 'human resources',
         telephone: '+1-800-555-1213',
