@@ -44,6 +44,66 @@ RSpec.describe SchemaDotOrg::Organization do
       end.not_to raise_error(NoMethodError)
     end
 
+    it 'is valid with a single ContactPoint' do
+      main_office = SchemaDotOrg::ContactPoint.new(
+        contact_type: 'customer service',
+        telephone: '+1-800-555-1212',
+        contact_option: 'TollFree',
+        available_language: %w[English Spanish]
+      )
+
+      expect do
+        SchemaDotOrg::Organization.new(
+          name: 'Public.Law',
+          contact_points: main_office,
+          founder: SchemaDotOrg::Person.new(name: 'Robb Shecter'),
+          founding_date: Date.new(2009, 3, 6),
+          founding_location: SchemaDotOrg::Place.new(address: 'Portland, OR'),
+          email: 'say_hi@public.law',
+          url: 'https://www.public.law',
+          logo: 'https://www.public.law/favicon-196x196.png',
+          same_as: [
+            'https://twitter.com/law_is_code',
+            'https://www.facebook.com/PublicDotLaw'
+          ]
+        )
+      end.not_to raise_error
+    end
+
+
+    it 'is valid with two ContactPoints' do
+      main_office = SchemaDotOrg::ContactPoint.new(
+        contact_type: 'customer service',
+        telephone: '+1-800-555-1212',
+        contact_option: 'TollFree',
+        available_language: %w[English Spanish]
+      )
+
+      hr_office = SchemaDotOrg::ContactPoint.new(
+        contact_type: 'human resources',
+        telephone: '+1-800-555-1213',
+        contact_option: 'TollFree',
+        available_language: ['English']
+      )
+
+      expect do
+        SchemaDotOrg::Organization.new(
+          name: 'Public.Law',
+          contact_points: [main_office, hr_office],
+          founder: SchemaDotOrg::Person.new(name: 'Robb Shecter'),
+          founding_date: Date.new(2009, 3, 6),
+          founding_location: SchemaDotOrg::Place.new(address: 'Portland, OR'),
+          email: 'say_hi@public.law',
+          url: 'https://www.public.law',
+          logo: 'https://www.public.law/favicon-196x196.png',
+          same_as: [
+            'https://twitter.com/law_is_code',
+            'https://www.facebook.com/PublicDotLaw'
+          ]
+        )
+      end.not_to raise_error
+    end
+
 
     it 'creates correct json correctly' do
       address = SchemaDotOrg::PostalAddress.new(
