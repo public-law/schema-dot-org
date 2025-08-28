@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 
-#
-# Model the Schema.org `Thing > Intangible > Offer`.  See https://schema.org/Offer
-#
 module SchemaDotOrg
+  ##
+  # Model the Schema.org `Thing > Intangible > Offer`.  See https://schema.org/Offer
+  #
   class Offer < SchemaType
     validated_attr :priceCurrency, type: String
     validated_attr :price,         type: Numeric

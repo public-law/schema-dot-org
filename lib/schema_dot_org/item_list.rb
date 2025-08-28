@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 
-#
-# Model the Schema.org `ItemList`.  See https://schema.org/ItemList
-#
 module SchemaDotOrg
+  ##
+  # Model the Schema.org `ItemList`.  See https://schema.org/ItemList
+  #
   class ItemList < SchemaType
     validated_attr :itemListElement,   type: Array,    presence: true
     validated_attr :itemListOrder,     type: String,   allow_nil: true

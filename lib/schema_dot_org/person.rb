@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 
-#
-# Model the Schema.org **Person**.  See http://schema.org/Person
-#
 module SchemaDotOrg
+  ##
+  # Model the Schema.org **Person**.  See http://schema.org/Person
+  #
   class Person < SchemaType
     validated_attr :award,            type: String, allow_nil: true
     validated_attr :alumni_of,        type: SchemaDotOrg::CollegeOrUniversity, allow_nil: true

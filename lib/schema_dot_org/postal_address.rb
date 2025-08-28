@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
-#
-# Model the Schema.org `Thing > Intangible > StructuredValue > ContactPoint > PostalAddress`.
-# See https://schema.org/PostalAddress
-#
+
 module SchemaDotOrg
+  ##
+  # Model the Schema.org `Thing > Intangible > StructuredValue > ContactPoint > PostalAddress`.
+  # See https://schema.org/PostalAddress
+  #
   class PostalAddress < SchemaType
 
     # AddressCountry: The country. Recommended to be in 2-letter ISO 3166-1 alpha-2
