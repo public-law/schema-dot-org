@@ -32,8 +32,6 @@ module SchemaDotOrg
     ########################################
     validated_attr :logo,              type: String
     validated_attr :name,              type: String
-    # Google allows `url` to be a string, although schema.org does not:
-    # https://developers.google.com/search/docs/appearance/structured-data/logo
     validated_attr :url,               type: String
   end
 end
