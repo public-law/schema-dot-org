@@ -33,6 +33,14 @@ RSpec.describe SchemaDotOrg::DiscussionForumPosting do
     )
   end
 
+  describe '#new' do
+    it 'raises an error if the author is not a Person or Organization' do
+      expect {
+        SchemaDotOrg::DiscussionForumPosting.new(author: 'not a Person or Organization')
+      }.to raise_error(ArgumentError)
+    end
+  end
+
   describe '#to_json_struct' do
     it 'has the correct attributes and values' do
       expect(post.to_json_struct).to eq(
