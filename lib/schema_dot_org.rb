@@ -1,8 +1,12 @@
 # frozen_string_literal: true
+
 require 'json'
 require 'validated_object'
 
 
+##
+# The main module for the schema-dot-org gem.
+#
 module SchemaDotOrg
   ##
   # Make a BreadcrumbList from an array of links. This is a convenience

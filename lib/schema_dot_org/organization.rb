@@ -6,10 +6,11 @@ require_relative 'person'
 require_relative 'place'
 require_relative 'postal_address'
 
-# Google allows `url` to be a string:
-# https://developers.google.com/search/docs/appearance/structured-data/logo
 
 module SchemaDotOrg
+  ##
+  # See https://schema.org/Organization
+  #
   class Organization < SchemaType
     validated_attr :address,           type: SchemaDotOrg::PostalAddress, allow_nil: true
     validated_attr :contact_points,    type: Array, allow_nil: true
@@ -23,6 +24,9 @@ module SchemaDotOrg
     validated_attr :same_as,           type: Array, allow_nil: true
     validated_attr :slogan,            type: String, allow_nil: true
     validated_attr :telephone,         type: String, allow_nil: true
+
+    # Google allows `url` to be a string:
+    # https://developers.google.com/search/docs/appearance/structured-data/logo
     validated_attr :url,               type: String
   end
 end

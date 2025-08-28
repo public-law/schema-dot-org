@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+
 module SchemaDotOrg
   ##
   # Model the Schema.org `Thing > Intangible > Language`.
