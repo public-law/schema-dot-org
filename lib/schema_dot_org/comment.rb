@@ -1,14 +1,13 @@
-
 # frozen_string_literal: true
 
 require 'date'
 require_relative 'person'
 
-#
-# Model the Schema.org `Thing > CreativeWork > Comment`.
-# See https://schema.org/Comment
-#
 module SchemaDotOrg
+  ##
+  # Model the Schema.org `Thing > CreativeWork > Comment`.
+  # See https://schema.org/Comment
+  #
   class Comment < SchemaType
     validated_attr :author,        type: Person, presence: true
     validated_attr :datePublished, type: Date,   presence: true

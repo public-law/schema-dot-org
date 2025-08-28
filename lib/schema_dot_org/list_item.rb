@@ -3,10 +3,10 @@
 
 require_relative 'product'
 
-#
-# Model the Schema.org `ItemListElement`.  See https://schema.org/ItemListElement
-#
 module SchemaDotOrg
+  ##
+  # Model the Schema.org `ItemListElement`.  See https://schema.org/ItemListElement
+  #
   class ListItem < SchemaType
     validated_attr :image,     type: String,                allow_nil: true
     validated_attr :item,      type: Object,                allow_nil: true  # Allow String or SchemaType

@@ -4,11 +4,11 @@ require 'date'
 require_relative 'person'
 require_relative 'organization'
 
-#
-# Model the Schema.org `Thing > CreativeWork > Article > SocialMediaPosting > DiscussionForumPosting`.
-# See https://schema.org/DiscussionForumPosting
-#
 module SchemaDotOrg
+  ##
+  # Model the Schema.org `Thing > CreativeWork > Article > SocialMediaPosting > DiscussionForumPosting`.
+  # See https://schema.org/DiscussionForumPosting
+  #
   class DiscussionForumPosting < SchemaType
     validated_attr :author,        type: union(Person, Organization), presence: true
     validated_attr :datePublished, type: union(Date, Time),           presence: true

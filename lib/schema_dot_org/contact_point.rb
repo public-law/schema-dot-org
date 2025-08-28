@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 
-#
-# Model the Schema.org `ContactPoint`.  See http://schema.org/ContactPoint
-#
 module SchemaDotOrg
+  ##
+  # Model the Schema.org `ContactPoint`.  See http://schema.org/ContactPoint
+  #
   class ContactPoint < SchemaType
     validated_attr :area_served,         type: Array,   allow_nil: true
     validated_attr :available_language,  type: Array,   allow_nil: true
