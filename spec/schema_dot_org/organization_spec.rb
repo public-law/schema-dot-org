@@ -35,7 +35,25 @@ RSpec.describe SchemaDotOrg::Organization do
     end
 
 
-    it 'is invalid without a name' do
+    it 'is invalid without a logo' do
+      expect do
+        SchemaDotOrg::Organization.new(
+          name: 'Public.Law',
+          founder: SchemaDotOrg::Person.new(name: 'Robb Shecter'),
+          founding_date: Date.new(2009, 3, 6),
+          founding_location: SchemaDotOrg::Place.new(address: 'Portland, OR'),
+          email: 'say_hi@public.law',
+          url: 'https://www.public.law',
+          same_as: [
+            'https://twitter.com/law_is_code',
+            'https://www.facebook.com/PublicDotLaw'
+          ]
+        )
+      end.to raise_error(ArgumentError, /Logo/)
+    end
+
+
+    it 'is invalid without a URL' do
       expect do
         SchemaDotOrg::Organization.new(
           name: 'Public.Law',
