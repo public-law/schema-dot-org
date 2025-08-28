@@ -21,6 +21,10 @@ module SchemaDotOrg
     # For example, California or another appropriate first-level Administrative division.
     validated_attr :addressRegion,   type: String, allow_nil: true
 
+    # ExtendedAddress: An address extension such as an apartment number, C/O or
+    # alternative name.
+    validated_attr :extendedAddress, type: String, allow_nil: true
+
     # PostalCode: The postal code. For example, 94043.
     validated_attr :postalCode,      type: String, allow_nil: true
 

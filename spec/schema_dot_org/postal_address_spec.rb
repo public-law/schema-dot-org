@@ -9,6 +9,7 @@ RSpec.describe SchemaDotOrg::PostalAddress do
       addressCountry:  "US",
       addressLocality: "Seattle",
       addressRegion:   "WA",
+      extendedAddress: "Apt. 405",
       postalCode:      "98052",
       streetAddress:   "20341 Whitworth Institute 405 N. Whitworth"
     )
@@ -22,6 +23,7 @@ RSpec.describe SchemaDotOrg::PostalAddress do
         "addressCountry"  => "US",
         "addressLocality" => "Seattle",
         "addressRegion"   => "WA",
+        "extendedAddress" => "Apt. 405",
         "postalCode"      => "98052",
         "streetAddress"   => "20341 Whitworth Institute 405 N. Whitworth"
       )
