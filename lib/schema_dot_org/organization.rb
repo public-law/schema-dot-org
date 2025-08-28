@@ -4,12 +4,14 @@ require 'date'
 
 require_relative 'person'
 require_relative 'place'
+require_relative 'postal_address'
 
 # Google allows `url` to be a string:
 # https://developers.google.com/search/docs/appearance/structured-data/logo
 
 module SchemaDotOrg
   class Organization < SchemaType
+    validated_attr :address,           type: SchemaDotOrg::PostalAddress, allow_nil: true
     validated_attr :contact_points,    type: Array, allow_nil: true
     validated_attr :email,             type: String, allow_nil: true
     validated_attr :founder,           type: SchemaDotOrg::Person, allow_nil: true

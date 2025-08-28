@@ -26,7 +26,12 @@ RSpec.describe SchemaDotOrg::Organization do
     end
 
     it 'creates correct json correctly' do
-      public_law = SchemaDotOrg::Organization.new(
+      address = SchemaDotOrg::PostalAddress.new(
+        addressCountry:  "US",
+        addressLocality: "Denver"
+      )
+
+    public_law = SchemaDotOrg::Organization.new(
         name: 'Public.Law',
         founder: SchemaDotOrg::Person.new(name: 'Robb Shecter'),
         founding_date: Date.new(2009, 3, 6),
@@ -38,7 +43,8 @@ RSpec.describe SchemaDotOrg::Organization do
         same_as: [
           'https://twitter.com/law_is_code',
           'https://www.facebook.com/PublicDotLaw'
-        ]
+        ],
+        address: address
       )
 
       expect(public_law.to_json_struct).to eq(
