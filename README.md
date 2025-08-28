@@ -237,20 +237,44 @@ gem 'schema_dot_org'
 
 ## Development
 
-The coding is as DRY as I could possibly make it. I think it's really
-easy to create and add to. For example, here's `Product`:
+We tried to make it as easy as possible to contribute new Schmema.Org types. 
+For example, here's a large one, [Organization]([url](https://github.com/public-law/schema-dot-org/blob/master/lib/schema_dot_org/organization.rb)).
+The declarative-style coding keeps it readable:
 
 ```ruby
-class Product < SchemaType
-  validated_attr :description,  type: String, allow_nil: true
-  validated_attr :image,        type: Array,  allow_nil: true
-  validated_attr :name,         type: String
-  validated_attr :offers,       type: SchemaDotOrg::AggregateOffer
-  validated_attr :url,          type: String
+require 'date'
+
+require_relative 'person'
+require_relative 'place'
+require_relative 'postal_address'
+
+module SchemaDotOrg
+  ##
+  # See https://schema.org/Organization
+  #
+  class Organization < SchemaType
+    validated_attr :address,           type: PostalAddress,                       allow_nil: true
+    validated_attr :contact_points,    type: union(ContactPoint, [ContactPoint]), allow_nil: true
+    validated_attr :email,             type: String,                              allow_nil: true
+    validated_attr :founder,           type: Person,                              allow_nil: true
+    validated_attr :founding_date,     type: Date,                                allow_nil: true
+    validated_attr :founding_location, type: Place,                               allow_nil: true
+    validated_attr :legal_name,        type: String,                              allow_nil: true
+    validated_attr :same_as,           type: union(String, [String]),             allow_nil: true
+    validated_attr :slogan,            type: String,                              allow_nil: true
+    validated_attr :telephone,         type: String,                              allow_nil: true
+
+    ########################################
+    # Attributes that are required by Google
+    ########################################
+    validated_attr :logo,              type: String
+    validated_attr :name,              type: String
+    validated_attr :url,               type: String
+  end
 end
 ```
 
-The attributes are from the [Schema.org Product spec](https://schema.org/Product).
+The attributes are from the [Schema.org Organization spec](https://schema.org/Organization).
 
 All Rails validations are available. These are just the attributes we've felt like
 adding. PR's are welcome if you want to add more. Also for more Schema.org types.
