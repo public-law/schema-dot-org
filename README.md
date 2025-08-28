@@ -237,7 +237,7 @@ gem 'schema_dot_org'
 
 ## Development
 
-We tried to make it as easy as possible to contribute new Schmema.Org types. 
+We aim to make it as easy as possible to contribute new Schema.Org types. 
 For example, here's a large one, [Organization]([url](https://github.com/public-law/schema-dot-org/blob/master/lib/schema_dot_org/organization.rb)).
 The declarative-style coding keeps it readable:
 
